@@ -1,0 +1,65 @@
+/* ============================================================
+   THEME PALETTES — themes.css
+   ============================================================ */
+
+/* These custom properties are toggled by JS when user changes theme */
+
+[data-theme="gold"] {
+  --accent:       #c9a96e;
+  --accent-light: #f0d080;
+  --accent-dark:  #9a7040;
+  --accent-glow:  rgba(201,169,110,0.35);
+  --cream:        #F4F1EA;
+  --cream-dark:   #ede6d8;
+  --text-dark:    #2c2416;
+  --text-mid:     #5a4e38;
+  --text-light:   #9a8c70;
+}
+
+[data-theme="rose"] {
+  --accent:       #c97b8c;
+  --accent-light: #f0a0b0;
+  --accent-dark:  #963060;
+  --accent-glow:  rgba(201,123,140,0.35);
+  --cream:        #FAF0F2;
+  --cream-dark:   #f0e0e5;
+  --text-dark:    #2c1420;
+  --text-mid:     #6a3848;
+  --text-light:   #b08090;
+}
+
+[data-theme="emerald"] {
+  --accent:       #5aab88;
+  --accent-light: #80d4ad;
+  --accent-dark:  #2e7a58;
+  --accent-glow:  rgba(90,171,136,0.35);
+  --cream:        #F0F5F0;
+  --cream-dark:   #ddeee6;
+  --text-dark:    #142018;
+  --text-mid:     #3a5c44;
+  --text-light:   #6a9878;
+}
+
+[data-theme="navy"] {
+  --accent:       #5a82c8;
+  --accent-light: #90b0f0;
+  --accent-dark:  #1a3870;
+  --accent-glow:  rgba(90,130,200,0.35);
+  --cream:        #F0F2F8;
+  --cream-dark:   #dde0ee;
+  --text-dark:    #0e1428;
+  --text-mid:     #2e4070;
+  --text-light:   #6878a8;
+}
+
+[data-theme="burgundy"] {
+  --accent:       #b05040;
+  --accent-light: #d88070;
+  --accent-dark:  #6b1a2a;
+  --accent-glow:  rgba(176,80,64,0.35);
+  --cream:        #FAF2F0;
+  --cream-dark:   #f0e0dc;
+  --text-dark:    #2c1010;
+  --text-mid:     #6a2828;
+  --text-light:   #b07868;
+}

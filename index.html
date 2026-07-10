@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مصمّم دعوات الزفاف الفاخرة | Wedding Designer Pro</title>
+  <meta name="description" content="أنشئ دعوة زفافك الرقمية الفاخرة — محرر احترافي مع معاينة حية" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@200;300;400;500;700;800&family=Reem+Kufi:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Naskh+Arabic:wght@400;600;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-bg" id="appBg"></div>
+  <div class="app-overlay"></div>
+
+  <div class="app-shell">
+
+    <!-- ══════════════════════════════════════
+         LEFT — EDITOR PANEL
+    ══════════════════════════════════════ -->
+    <aside class="ep" id="editorPanel">
+
+      <div class="ep-header">
+        <div class="ep-brand">
+          <div class="ep-brand-gem">💍</div>
+          <div>
+            <div class="ep-brand-ar">محرر الدعوة</div>
+            <div class="ep-brand-en">Wedding Designer Pro</div>
+          </div>
+        </div>
+        <button class="ep-collapse" id="epCollapse" title="طي اللوحة">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      </div>
+
+      <!-- TABS -->
+      <div class="ep-tabs">
+        <button class="ep-tab active" data-tab="basics">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          البيانات
+        </button>
+        <button class="ep-tab" data-tab="schedule">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          البرنامج
+        </button>
+        <button class="ep-tab" data-tab="options">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 0 3 12a10 10 0 0 0 10 10 10 10 0 0 0 9.07-5.93M4.93 4.93A10 10 0 0 1 21 12"/></svg>
+          الخيارات
+        </button>
+      </div>
+
+      <!-- TAB: BASICS -->
+      <div class="ep-pane active" id="tab-basics">
+
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            صورة العرسان (خلف القوس)
+          </div>
+
+          <!-- Image Source Selector -->
+          <div class="img-src-selector">
+            <button class="iss-btn active" id="btn-src-preset" onclick="setImageSource('preset')">جاهزة</button>
+            <button class="iss-btn" id="btn-src-url" onclick="setImageSource('url')">رابط ويب</button>
+            <button class="iss-btn" id="btn-src-upload" onclick="setImageSource('upload')">تحميل ملف</button>
+          </div>
+
+          <!-- Content for PRESETS -->
+          <div class="img-src-content" id="src-content-preset">
+            <div class="preset-thumbs">
+              <button class="pt-thumb active" onclick="setPresetImage('presets/couple1.png', this)" style="background-image:url('presets/couple1.png');" title="كلاسيكي رقمي"></button>
+              <button class="pt-thumb" onclick="setPresetImage('presets/couple2.png', this)" style="background-image:url('presets/couple2.png');" title="دبل ذهبية"></button>
+              <button class="pt-thumb" onclick="setPresetImage('presets/couple3.png', this)" style="background-image:url('presets/couple3.png');" title="قوس الورد"></button>
+            </div>
+            <div class="wa-friendly-note">✓ هذا الخيار ينتج رابطاً قصيراً ومثالياً للمشاركة على الواتساب.</div>
+          </div>
+
+          <!-- Content for URL -->
+          <div class="img-src-content hidden" id="src-content-url">
+            <div class="ep-field">
+              <input class="ep-input" id="imgUrlInput" type="url" placeholder="ضع رابط الصورة المباشر هنا..." oninput="setWebImage(this.value)" />
+            </div>
+            <div class="wa-friendly-note">✓ هذا الخيار آمن وسلس جداً للواتساب. (امتدادات png, jpg, webp)</div>
+          </div>
+
+          <!-- Content for UPLOAD -->
+          <div class="img-src-content hidden" id="src-content-upload">
+            <div class="upload-zone" id="coupleUploadZone" onclick="document.getElementById('couplePhotoInput').click()">
+              <div class="uz-inner" id="coupleUploadInner">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>انقر لرفع صورة من جهازك</span>
+                <span class="uz-hint">حجم أقصى 5 ميجا بايت</span>
+              </div>
+              <input type="file" id="couplePhotoInput" accept="image/*" class="upload-input" />
+            </div>
+            <div class="wa-friendly-note">✓ سيتم ضغط الصورة وتصغيرها تلقائياً لضمان رابط مشاركة سريع وخفيف ومناسب للواتساب.</div>
+          </div>
+
+          <!-- Image Adjustments / Controls -->
+          <div class="image-adjust-panel">
+            <div class="ep-field">
+              <div class="slider-label-row">
+                <span class="ep-label">تكبير / تصغير الصورة</span>
+                <span class="slider-value" id="val-zoom">100%</span>
+              </div>
+              <input type="range" class="ep-slider" id="slider-zoom" min="50" max="250" value="100" oninput="adjustImage('zoom', this.value)" />
+            </div>
+            <div class="ep-field">
+              <div class="slider-label-row">
+                <span class="ep-label">إزاحة رأسية (أعلى/أسفل)</span>
+                <span class="slider-value" id="val-posY">50%</span>
+              </div>
+              <input type="range" class="ep-slider" id="slider-posY" min="0" max="100" value="50" oninput="adjustImage('posY', this.value)" />
+            </div>
+            <div class="ep-field">
+              <div class="slider-label-row">
+                <span class="ep-label">إزاحة أفقية (يمين/يسار)</span>
+                <span class="slider-value" id="val-posX">50%</span>
+              </div>
+              <input type="range" class="ep-slider" id="slider-posX" min="0" max="100" value="50" oninput="adjustImage('posX', this.value)" />
+            </div>
+          </div>
+        </div>
+
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            أسماء العرسان
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">اسم العريس</label>
+            <input class="ep-input" id="groomName" type="text" value="محمد عبدالله الراشد" placeholder="الاسم الكامل للعريس" />
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">اسم العروس</label>
+            <input class="ep-input" id="brideName" type="text" value="سارة خالد المنصور" placeholder="الاسم الكامل للعروس" />
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">الموونوغرام</label>
+            <input class="ep-input" id="monogram" type="text" value="م & س" maxlength="7" />
+          </div>
+        </div>
+
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            نص الترحيب
+          </div>
+          <textarea class="ep-input ep-textarea" id="welcomeText">يسعدنا أن نشارككم فرحتنا بحفل زفافنا</textarea>
+        </div>
+
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            التاريخ والمكان
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">تاريخ الحفل</label>
+            <input class="ep-input" id="weddingDate" type="date" value="2026-09-15" />
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">وقت بدء الحفل</label>
+            <input class="ep-input" id="weddingTime" type="text" value="7:00 مساءً" />
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">اسم القاعة / المكان</label>
+            <input class="ep-input" id="venueName" type="text" value="قصر الأميرة - الرياض" />
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">العنوان التفصيلي</label>
+            <input class="ep-input" id="venueAddress" type="text" value="طريق الملك فهد، حي العليا" />
+          </div>
+        </div>
+
+      </div><!-- /tab-basics -->
+
+      <!-- TAB: SCHEDULE -->
+      <div class="ep-pane" id="tab-schedule">
+
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            برنامج الحفل (Timeline)
+          </div>
+          <div class="timeline-editor" id="timelineEditor"></div>
+          <button class="ep-add-btn" onclick="addTimelineItem()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            إضافة محطة
+          </button>
+        </div>
+
+        <div class="ep-section" style="padding-bottom:28px;">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            الشروط والملاحظات
+          </div>
+          <div class="notes-editor" id="notesEditor"></div>
+          <button class="ep-add-btn" onclick="addNoteItem()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            إضافة ملاحظة
+          </button>
+        </div>
+
+      </div><!-- /tab-schedule -->
+
+      <!-- TAB: OPTIONS -->
+      <div class="ep-pane" id="tab-options">
+
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            الثيم والألوان
+          </div>
+          <div class="theme-grid" id="themeGrid">
+            <button class="tc active" data-theme="gold" onclick="applyTheme('gold',this)">
+              <span class="tc-dot" style="background:linear-gradient(135deg,#9a7040,#c9a96e,#f0d080)"></span>ذهبي
+            </button>
+            <button class="tc" data-theme="rose" onclick="applyTheme('rose',this)">
+              <span class="tc-dot" style="background:linear-gradient(135deg,#963060,#c97b8c,#f0a0b0)"></span>وردي
+            </button>
+            <button class="tc" data-theme="emerald" onclick="applyTheme('emerald',this)">
+              <span class="tc-dot" style="background:linear-gradient(135deg,#2e7a58,#5aab88,#80d4ad)"></span>زمردي
+            </button>
+            <button class="tc" data-theme="navy" onclick="applyTheme('navy',this)">
+              <span class="tc-dot" style="background:linear-gradient(135deg,#1a3870,#5a82c8,#90b0f0)"></span>كحلي
+            </button>
+            <button class="tc" data-theme="burgundy" onclick="applyTheme('burgundy',this)">
+              <span class="tc-dot" style="background:linear-gradient(135deg,#6b1a2a,#b05040,#d88070)"></span>عنابي
+            </button>
+          </div>
+          <div class="ep-field" style="margin-top:12px;">
+            <label class="ep-label">لون مخصص</label>
+            <input class="ep-input color-input" id="customColor" type="color" value="#c9a96e" />
+          </div>
+        </div>
+
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            إظهار / إخفاء الأقسام
+          </div>
+          <div class="toggle-list">
+            <div class="toggle-row">
+              <span class="tr-label">العداد التنازلي</span>
+              <button class="tog on" id="tog-countdown" data-section="countdown" onclick="toggleSection('countdown',this)">
+                <span class="tog-knob"></span>
+              </button>
+            </div>
+            <div class="toggle-row">
+              <span class="tr-label">برنامج الحفل</span>
+              <button class="tog on" id="tog-timeline" data-section="timeline" onclick="toggleSection('timeline',this)">
+                <span class="tog-knob"></span>
+              </button>
+            </div>
+            <div class="toggle-row">
+              <span class="tr-label">الملاحظات والشروط</span>
+              <button class="tog on" id="tog-notes" data-section="notes" onclick="toggleSection('notes',this)">
+                <span class="tog-knob"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- FONT CONTROL SECTION -->
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+            نوع الخط الرئيسي
+          </div>
+          <div class="font-picker" id="fontPicker">
+            <button class="font-chip active" data-font="Amiri" onclick="changeFont('Amiri',this)">
+              <span class="fc-preview" style="font-family:'Amiri'">أبجد</span>
+              <span class="fc-name">كلاسيكي</span>
+            </button>
+            <button class="font-chip" data-font="Reem Kufi" onclick="changeFont('Reem Kufi',this)">
+              <span class="fc-preview" style="font-family:'Reem Kufi'">أبجد</span>
+              <span class="fc-name">معاصر</span>
+            </button>
+            <button class="font-chip" data-font="Noto Naskh Arabic" onclick="changeFont('Noto Naskh Arabic',this)">
+              <span class="fc-preview" style="font-family:'Noto Naskh Arabic'">أبجد</span>
+              <span class="fc-name">نسخي</span>
+            </button>
+            <button class="font-chip" data-font="Scheherazade New" onclick="changeFont('Scheherazade New',this)">
+              <span class="fc-preview" style="font-family:'Scheherazade New'">أبجد</span>
+              <span class="fc-name">شهرزاد</span>
+            </button>
+            <button class="font-chip" data-font="Tajawal" onclick="changeFont('Tajawal',this)">
+              <span class="fc-preview" style="font-family:'Tajawal'">أبجد</span>
+              <span class="fc-name">تجوال</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- MUSIC SECTION -->
+        <div class="ep-section">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            موسيقى الحفل (تشغّل عند الفتح)
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">رابط أغنية مباشر (MP3)</label>
+            <input class="ep-input" id="musicUrl" type="url" placeholder="https://example.com/song.mp3" oninput="setMusicUrl(this.value)" />
+          </div>
+          <div class="ep-field">
+            <label class="ep-label">أو رفع ملف صوتي من جهازك</label>
+            <div class="upload-zone" style="min-height:64px;" onclick="document.getElementById('musicFileInput').click()">
+              <div class="uz-inner" id="musicUploadInner">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                <span id="musicFileName">MP3 • M4A • WAV • OGG</span>
+              </div>
+              <input type="file" id="musicFileInput" accept="audio/*" class="upload-input" />
+            </div>
+          </div>
+          <div class="toggle-row">
+            <span class="tr-label">تشغيل تلقائي عند فتح الستارة</span>
+            <button class="tog on" id="tog-music" onclick="toggleMusicAutoplay(this)"><span class="tog-knob"></span></button>
+          </div>
+          <button class="ep-add-btn" onclick="testMusicPlayback()" style="margin-top:8px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            تجربة تشغيل الموسيقى
+          </button>
+        </div>
+
+        <div class="ep-section" style="padding-bottom:36px;">
+          <div class="eps-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            مشاركة الدعوة
+          </div>
+          <button class="ep-save-btn" onclick="saveAndShare()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            توليد رابط المشاركة
+          </button>
+          <div class="share-box" id="shareBox">
+            <div class="sb-label">تم توليد الرابط المكبوس للواتساب بنجاح:</div>
+            
+            <!-- WhatsApp Link representation -->
+            <a id="externalInviteLink" href="#" target="_blank" class="sb-copy" style="text-decoration:none; background:rgba(197,160,89,0.1); margin-bottom:8px; display:flex; align-items:center; justify-content:center;">
+              🔗 انقر هنا لفتح الدعوة في صفحة خارجية
+            </a>
+
+            <button class="sb-copy" onclick="copyLink()" style="margin-bottom:8px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              نسخ رابط الدعوة 📋
+            </button>
+
+            <button class="sb-copy" onclick="shareToWhatsApp()" style="background:rgba(40,167,69,0.18); border-color:rgba(40,167,69,0.3); color:#72db8c;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              ارسل مباشرة عبر الواتساب 🟢
+            </button>
+            
+            <!-- Hidden text for debug if needed -->
+            <div class="sb-link" id="sbLink" style="display:none;"></div>
+          </div>
+        </div>
+
+      </div><!-- /tab-options -->
+
+    </aside><!-- /ep -->
+
+    <!-- ══════════════════════════════════════
+         RIGHT — LIVE PREVIEW STAGE
+    ══════════════════════════════════════ -->
+    <main class="preview-stage" id="previewStage">
+
+      <!-- Stage Header with Hamburger Menu and Badge -->
+      <div class="stage-header" style="display:flex; justify-content:space-between; align-items:center; width:100%; max-width:372px; margin-bottom:12px; z-index:100; padding:0 8px;">
+        <button class="hamburger-menu" id="hamburgerMenuBtn" onclick="toggleEditorPanel()" title="إظهار/إخفاء لوحة التحكم" style="background:rgba(255,255,255,0.04); border:1px solid rgba(197,160,89,0.2); border-radius:10px; width:40px; height:40px; cursor:pointer; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:4px; transition:all 0.2s;">
+          <span class="h-line h-l1" style="display:block; width:18px; height:2px; background:var(--A); transition:0.3s;"></span>
+          <span class="h-line h-l2" style="display:block; width:18px; height:2px; background:var(--A); transition:0.3s;"></span>
+          <span class="h-line h-l3" style="display:block; width:18px; height:2px; background:var(--A); transition:0.3s;"></span>
+        </button>
+        <div class="stage-badge" style="margin:0; font-size:10px;">
+          <span class="stage-dot"></span>
+          معاينة حية
+          <span class="stage-dot2"></span>
+          Live Preview
+        </div>
+      </div>
+
+      <!-- Playback/Testing Controls -->
+      <div class="stage-controls" style="margin-bottom:8px; z-index:10;">
+        <button class="stage-btn-replay" onclick="resetToSplash()" style="background:rgba(197, 160, 89, 0.15); border:1px solid rgba(197, 160, 89, 0.3); border-radius:30px; color:var(--A); padding:8px 18px; font-family:'Tajawal', sans-serif; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; transition:all 0.2s ease; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+          🔄 إعادة تجربة حركة الفتح والستائر
+        </button>
+      </div>
+
+      <!-- Elegant Standalone Invite Card (Phone Mockup Removed) -->
+      <div class="phone" id="phone" style="border-radius:24px; border:1px solid rgba(197,160,89,0.25); box-shadow:0 24px 60px rgba(0,0,0,0.65), 0 0 40px rgba(197,160,89,0.05); overflow:hidden;">
+        
+        <!-- Inner content container -->
+        <div class="phone-screen" id="phoneScreen" style="height:100%; width:100%; border-radius:0;">
+
+          <!-- ◈ SPLASH / CURTAIN ◈ -->
+          <div class="splash" id="splash">
+
+            <!-- Moving shadows layer -->
+            <div class="shadows" aria-hidden="true">
+              <div class="sh s1"></div>
+              <div class="sh s2"></div>
+              <div class="sh s3"></div>
+              <div class="sh s4"></div>
+              <div class="sh s5"></div>
+            </div>
+
+            <!-- Gold thin ornament lines -->
+            <div class="splash-lines" aria-hidden="true">
+              <div class="sl sl-h1"></div>
+              <div class="sl sl-h2"></div>
+              <div class="sl sl-v"></div>
+            </div>
+
+            <!-- Left Curtain Panel -->
+            <div class="curtain cur-l" id="curtainL">
+              <svg class="cur-svg" viewBox="0 0 110 600" fill="none" preserveAspectRatio="xMidYMid meet">
+                <line x1="100" y1="0" x2="100" y2="600" stroke="#C5A059" stroke-width="0.8" opacity="0.35"/>
+                <circle cx="100" cy="80" r="10" stroke="#C5A059" stroke-width="0.7" fill="none" opacity="0.45"/>
+                <circle cx="100" cy="80" r="4" fill="#C5A059" opacity="0.4"/>
+                <path d="M70 160 Q100 135 130 160" stroke="#C5A059" stroke-width="0.8" fill="none" opacity="0.35"/>
+                <path d="M75 170 Q100 148 125 170" stroke="#C5A059" stroke-width="0.5" fill="none" opacity="0.25"/>
+                <circle cx="100" cy="300" r="6" stroke="#C5A059" stroke-width="0.6" fill="none" opacity="0.3"/>
+                <path d="M80 430 Q100 415 120 430" stroke="#C5A059" stroke-width="0.7" fill="none" opacity="0.3"/>
+                <circle cx="100" cy="520" r="8" stroke="#C5A059" stroke-width="0.6" fill="none" opacity="0.25"/>
+              </svg>
+            </div>
+
+            <!-- Right Curtain Panel -->
+            <div class="curtain cur-r" id="curtainR">
+              <svg class="cur-svg" viewBox="0 0 110 600" fill="none" preserveAspectRatio="xMidYMid meet" style="transform:scaleX(-1)">
+                <line x1="100" y1="0" x2="100" y2="600" stroke="#C5A059" stroke-width="0.8" opacity="0.35"/>
+                <circle cx="100" cy="80" r="10" stroke="#C5A059" stroke-width="0.7" fill="none" opacity="0.45"/>
+                <circle cx="100" cy="80" r="4" fill="#C5A059" opacity="0.4"/>
+                <path d="M70 160 Q100 135 130 160" stroke="#C5A059" stroke-width="0.8" fill="none" opacity="0.35"/>
+                <path d="M75 170 Q100 148 125 170" stroke="#C5A059" stroke-width="0.5" fill="none" opacity="0.25"/>
+                <circle cx="100" cy="300" r="6" stroke="#C5A059" stroke-width="0.6" fill="none" opacity="0.3"/>
+                <path d="M80 430 Q100 415 120 430" stroke="#C5A059" stroke-width="0.7" fill="none" opacity="0.3"/>
+                <circle cx="100" cy="520" r="8" stroke="#C5A059" stroke-width="0.6" fill="none" opacity="0.25"/>
+              </svg>
+            </div>
+
+            <!-- Center Content -->
+            <div class="splash-center" id="splashCenter">
+
+              <!-- Top text / brand -->
+              <div class="sc-top">
+                <div class="sc-ornament">
+                  <div class="sc-orn-line"></div>
+                  <span class="sc-orn-star">✦</span>
+                  <div class="sc-orn-line"></div>
+                </div>
+                <div class="sc-mono" id="scMono">م &amp; س</div>
+                <div class="sc-tagline">WEDDING INVITATION</div>
+              </div>
+
+              <!-- Arch Frame with photo -->
+              <div class="arch-wrap">
+                <!-- Photo layer (behind SVG arch frame) -->
+                <div class="arch-photo" id="archPhoto">
+                  <div class="arch-photo-inner" id="archPhotoInner"></div>
+                </div>
+                <!-- SVG: Arch Frame (cream + gold border) -->
+                <svg class="arch-svg" viewBox="0 0 186 252" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Cream frame with arch-shaped cutout (fill-rule evenodd) -->
+                  <path fill-rule="evenodd" d="
+                    M0 0 H186 V252 H0 Z
+                    M33 252 L33 112 Q33 24 93 24 Q153 24 153 112 L153 252 Z
+                  " fill="#F4F1EA"/>
+                  <!-- Inner gold arch border -->
+                  <path d="M33 252 L33 112 Q33 24 93 24 Q153 24 153 112 L153 252" fill="none" stroke="#C5A059" stroke-width="1.6"/>
+                  <!-- Outer subtle border -->
+                  <path d="M28 252 L28 114 Q28 18 93 18 Q158 18 158 114 L158 252" fill="none" stroke="#C5A059" stroke-width="0.6" opacity="0.4"/>
+                  <!-- Crown gem at apex -->
+                  <circle cx="93" cy="24" r="5.5" fill="#C5A059"/>
+                  <circle cx="93" cy="24" r="9" fill="none" stroke="#C5A059" stroke-width="0.8" opacity="0.5"/>
+                  <!-- Shoulder gems -->
+                  <circle cx="33" cy="112" r="3" fill="#C5A059" opacity="0.75"/>
+                  <circle cx="153" cy="112" r="3" fill="#C5A059" opacity="0.75"/>
+                  <!-- Corner bracket ornaments -->
+                  <path d="M8 8 L8 22 M8 8 L22 8" stroke="#C5A059" stroke-width="1.1" opacity="0.55"/>
+                  <path d="M178 8 L178 22 M178 8 L164 8" stroke="#C5A059" stroke-width="1.1" opacity="0.55"/>
+                  <path d="M8 244 L8 232 M8 244 L22 244" stroke="#C5A059" stroke-width="1.1" opacity="0.55"/>
+                  <path d="M178 244 L178 232 M178 244 L164 244" stroke="#C5A059" stroke-width="1.1" opacity="0.55"/>
+                  <!-- Bottom horizontal rule -->
+                  <line x1="12" y1="247" x2="174" y2="247" stroke="#C5A059" stroke-width="0.6" opacity="0.35"/>
+                </svg>
+              </div>
+
+              <!-- Open Button -->
+              <div class="open-btn-wrap">
+                <button class="open-btn" id="openBtn" onclick="openInvitation()">
+                  <div class="ob-ring ob-r1"></div>
+                  <div class="ob-ring ob-r2"></div>
+                  <div class="ob-ring ob-r3"></div>
+                  <div class="ob-core">
+                    <span class="ob-ar">افتح الدعوة</span>
+                    <span class="ob-en">OPEN</span>
+                  </div>
+                </button>
+              </div>
+
+            </div><!-- /splash-center -->
+
+          </div><!-- /splash -->
+
+          <!-- ◈ INVITATION CONTENT ◈ -->
+          <div class="invitation" id="invitation">
+
+            <!-- Paper texture overlay -->
+            <div class="inv-paper-texture" aria-hidden="true"></div>
+
+            <!-- Top ornament -->
+            <div class="inv-block fade-up" data-d="0">
+              <div class="inv-top-orn">
+                <div class="ito-line"></div><span class="ito-star">✦</span><div class="ito-line"></div>
+              </div>
+            </div>
+
+            <!-- Welcome -->
+            <div class="inv-block fade-up" data-d="0.1">
+              <p class="inv-welcome" id="invWelcome">يسعدنا أن نشارككم فرحتنا بحفل زفافنا</p>
+            </div>
+
+            <!-- Emoji divider -->
+            <div class="inv-block fade-up" data-d="0.2">
+              <div class="inv-emoji-div"><div class="ied-line"></div><span>💍</span><div class="ied-line"></div></div>
+            </div>
+
+            <!-- Groom -->
+            <div class="inv-block fade-up" data-d="0.3">
+              <div class="inv-name-lbl">العريـم</div>
+              <div class="inv-name" id="invGroom">محمد عبدالله الراشد</div>
+            </div>
+
+            <!-- Ampersand -->
+            <div class="inv-block fade-up" data-d="0.4">
+              <div class="inv-amp">&amp;</div>
+            </div>
+
+            <!-- Bride -->
+            <div class="inv-block fade-up" data-d="0.5">
+              <div class="inv-name-lbl">العروس</div>
+              <div class="inv-name" id="invBride">سارة خالد المنصور</div>
+            </div>
+
+            <!-- Divider -->
+            <div class="inv-block fade-up" data-d="0.6">
+              <div class="inv-orn-div">
+                <div class="iod-line"></div>
+                <svg width="20" height="18" viewBox="0 0 20 18"><path d="M10 1L12.5 7H18.5L13.8 11L15.6 17L10 13.5L4.4 17L6.2 11L1.5 7H7.5Z" fill="#C5A059" opacity="0.55"/></svg>
+                <div class="iod-line"></div>
+              </div>
+            </div>
+
+            <!-- Date Card -->
+            <div class="inv-block fade-up" data-d="0.7">
+              <div class="inv-date-card">
+                <div class="idc-date" id="invDateText">الثلاثاء ١٥ سبتمبر ٢٠٢٦</div>
+                <div class="idc-time" id="invTimeText">٧:٠٠ مساءً</div>
+                <div class="idc-sep">◆</div>
+                <div class="idc-venue" id="invVenue">قصر الأميرة - الرياض</div>
+                <div class="idc-addr" id="invAddr">طريق الملك فهد، حي العليا</div>
+              </div>
+            </div>
+
+            <!-- Glass Countdown -->
+            <div class="inv-block fade-up inv-section-block" id="invCountdown" data-d="0.85" data-section="countdown">
+              <div class="inv-glass-cd">
+                <div class="igcd-title">العدّ التنازلي</div>
+                <div class="igcd-units">
+                  <div class="igcd-u"><div class="igcd-n" id="cdDays">00</div><div class="igcd-l">يوم</div></div>
+                  <div class="igcd-c">:</div>
+                  <div class="igcd-u"><div class="igcd-n" id="cdHours">00</div><div class="igcd-l">ساعة</div></div>
+                  <div class="igcd-c">:</div>
+                  <div class="igcd-u"><div class="igcd-n" id="cdMins">00</div><div class="igcd-l">دقيقة</div></div>
+                  <div class="igcd-c">:</div>
+                  <div class="igcd-u"><div class="igcd-n" id="cdSecs">00</div><div class="igcd-l">ثانية</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <div class="inv-section-block" id="invTimeline" data-section="timeline">
+              <div class="inv-block fade-up" data-d="1.0">
+                <div class="inv-sec-hdr">
+                  <div class="ish-line"></div><span>برنامج الحفل</span><div class="ish-line"></div>
+                </div>
+              </div>
+              <div class="inv-timeline-list" id="invTimelineList"></div>
+            </div>
+
+            <!-- Notes Section -->
+            <div class="inv-section-block" id="invNotes" data-section="notes">
+              <div class="inv-block fade-up" data-d="1.15">
+                <div class="inv-sec-hdr">
+                  <div class="ish-line"></div><span>ملاحظات الحضور</span><div class="ish-line"></div>
+                </div>
+              </div>
+              <div class="inv-notes-list" id="invNotesList"></div>
+            </div>
+
+
+
+            <!-- Footer -->
+            <div class="inv-block fade-up" data-d="1.45">
+              <div class="inv-footer">
+                <div class="if-line"></div><span class="if-heart">♥</span><div class="if-line"></div>
+                <p class="if-text">بانتظار تشريفكم</p>
+                <div class="if-sub">وليمة العرس</div>
+              </div>
+            </div>
+
+          </div><!-- /invitation -->
+
+        </div><!-- /phone-screen -->
+
+      </div><!-- /phone -->
+
+      <!-- Side label -->
+      <div class="stage-hint">اضغط OPEN لمعاينة الأنيميشن</div>
+
+    </main>
+
+  </div><!-- /app-shell -->
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Hidden audio element for wedding music -->
+  <audio id="weddingAudio" loop preload="none"></audio>
+
+  <!-- ══════════════════════════════════════
+       WELCOME MODAL (First Visit Only)
+  ══════════════════════════════════════ -->
+  <div class="wm-backdrop" id="welcomeModal">
+    <div class="wm-card">
+      <!-- Animated corner ornaments -->
+      <div class="wm-corner wm-c-tl"></div>
+      <div class="wm-corner wm-c-tr"></div>
+      <div class="wm-corner wm-c-bl"></div>
+      <div class="wm-corner wm-c-br"></div>
+
+      <div class="wm-icon">💍</div>
+
+      <div class="wm-orn">
+        <div class="wm-orn-line"></div><span>✦</span><div class="wm-orn-line"></div>
+      </div>
+
+      <h1 class="wm-title">مرحباً بكم</h1>
+      <p class="wm-subtitle">في مصمّم دعوات الزفاف الفاخرة</p>
+
+      <div class="wm-divider">◆</div>
+
+      <div class="wm-dev-card">
+        <div class="wm-dev-label">تطوير وتصميم</div>
+        <div class="wm-dev-name">ENG: Mohammad Zematr</div>
+        <a href="tel:01287885776" class="wm-dev-phone">📞 01287885776</a>
+      </div>
+
+      <button class="wm-start-btn" onclick="closeWelcomeModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        ابدأ تصميم دعوتك الآن
+      </button>
+
+      <div class="wm-footer">Wedding Designer Pro &copy; 2026</div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
